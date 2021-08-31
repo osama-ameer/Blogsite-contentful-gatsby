@@ -1,29 +1,94 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import { graphql, Link } from 'gatsby'
+import React from 'react'
+import Img from 'gatsby-image';
+import Layout from '../components/Layout';
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["AUTO", "WEBP", "AVIF"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </p>
-  </Layout>
-)
 
-export default IndexPage
+
+
+function index({data}) {
+  return (
+    <Layout >
+    <div>
+      
+      
+      <ul className="posts">
+
+        { data.allContentfulBlogPost.edges.map(edge => {
+
+          return(
+            <li className="post" key={edge.node.id} >
+              <h2> {edge.node.title}</h2>
+                <div className="meta">
+                    <span>Posted on {edge.node.publicationDate}</span>
+                </div>
+                    
+                    {
+                      edge.node.images && (
+                        <Img className="featured" fluid={edge.node.images.fluid}
+                            alt="my image" />
+                      )
+                   }
+
+                    <p className="excerpt">
+                        {edge.node.excerpt.childMarkdownRemark.excerpt}
+                      </p>
+                                        
+                      <div className="button">
+                                        <Link to={`/${edge.node.slug}`}>Read More</Link>
+                                    </div>
+          </li>
+          )
+        })
+
+
+    //   <h1>INDEX PAGE</h1>
+    //   <h2>{data.allContentfulBlogPost.edges[1].node.title}</h2>
+    //   <h2>{data.allContentfulBlogPost.edges[1].node.slug}</h2>
+      
+    //   {
+    //      data.allContentfulBlogPost.edges[0].node.images && (
+    //     <Img className="featured" fluid={data.allContentfulBlogPost.edges[0].node.images.fluid}
+    //           alt={data.allContentfulBlogPost.edges[0].node.title} />
+    //  )
+    //   }
+      
+    }
+       
+       
+       </ul>
+    </div>
+    </Layout>
+  )
+}
+
+export default index
+
+export const query =
+ graphql `
+query MyQuery {
+  allContentfulBlogPost(sort: {fields: publicationDate, order: ASC}) {
+    edges {
+      node {
+        id
+        slug
+        publicationDate(formatString: "DD MM YYYY")
+        title
+        images {
+          id
+          fluid(maxWidth: 0) {
+            ...GatsbyContentfulFluid
+          }
+        }
+        excerpt {
+          childMarkdownRemark {
+            excerpt(pruneLength: 500)
+          }
+        }
+      }
+    }
+  }
+}
+
+`
