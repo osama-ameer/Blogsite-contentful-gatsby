@@ -8,8 +8,9 @@ import Layout from '../components/Layout';
 const template = (props) => {
     console.log(props);
     return (
-        <Layout >
+       
         <div>
+             <Layout >
             
             <Link  to="/">Visit the Blog Page</Link>
             <div className="content">
@@ -30,8 +31,9 @@ const template = (props) => {
                 
                
             </div>
+            </Layout>
         </div>
-        </Layout>
+        
     )
 }
 

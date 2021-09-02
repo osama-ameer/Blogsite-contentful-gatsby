@@ -9,9 +9,9 @@ import Layout from '../components/Layout';
 
 function index({data}) {
   return (
-    <Layout >
+    
     <div>
-      
+      <Layout >      
       
       <ul className="posts">
 
@@ -58,8 +58,9 @@ function index({data}) {
        
        
        </ul>
+       </Layout>
     </div>
-    </Layout>
+    
   )
 }
 

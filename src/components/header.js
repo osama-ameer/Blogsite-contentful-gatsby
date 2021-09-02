@@ -1,34 +1,46 @@
-import { Link } from "gatsby"
-import React from "react"
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
 
-const Header = ({siteTitle}) => {
-    return (
-        <header
-            style={{
-            background: `rebeccapurple`,
-            marginBottom: `1.45rem`,
-            }}
-        >
-            <div
-            style={{
-                margin: `0 auto`,
-                maxWidth: 960,
-                padding: `1.45rem 1.0875rem`,
-            }}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+}));
+
+export default function DenseAppBar() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <AppBar position='static'>
+        <Toolbar variant='dense'>
+          <IconButton
+            edge='start'
+            className={classes.menuButton}
+            color='inherit'
+            aria-label='menu'
+          ></IconButton>
+          <Typography variant='h6' color='inherit'>
+            <h3
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                marginLeft: "500px",
+              }}
             >
-            <h1 style={{ margin: 0 }}>
-                <Link
-                to="/"
-                style={{
-                    color: `white`,
-                    textDecoration: `none`,
-                }}
-                >
-                {siteTitle}
-                </Link>
-            </h1>
-            </div>
-        </header>
-    )
+              Blog Site By Osama Ammer
+            </h3>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
-export default Header
