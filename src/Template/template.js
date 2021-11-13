@@ -4,6 +4,24 @@ import Img from 'gatsby-image'
 import Layout from '../components/Layout'
 // import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
+export const query = graphql`
+    query($slug: String!) {
+        contentfulBlogPost(slug: {eq: $slug}) {
+            title
+      publicationDate(formatString: "DD MM YYYY")
+      images {
+        fluid(maxWidth: 0) {
+          ...GatsbyContentfulFluid
+        }
+      }
+      content {
+        raw
+      }
+        }
+    }
+`;
+
+
 
 const template = (props) => {
     console.log(props);
@@ -38,22 +56,4 @@ const template = (props) => {
 }
 
 export default template
-
-export const query = graphql`
-    query($slug: String!) {
-        contentfulBlogPost(slug: {eq: $slug}) {
-            title
-      publicationDate(formatString: "DD MM YYYY")
-      images {
-        fluid(maxWidth: 0) {
-          ...GatsbyContentfulFluid
-        }
-      }
-      content {
-        raw
-      }
-        }
-    }
-`;
-
 

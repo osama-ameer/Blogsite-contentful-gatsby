@@ -24,7 +24,7 @@ body {
   display: block;
 }
 .excerpt {
-  margin: 30px 200px 15px;
+  margin: 30px 250px 15px;
   font-weight: 300;
   letter-spacing: 0.02em;
 }
@@ -35,7 +35,8 @@ body {
   padding: 20px 0;
 }
 .featured {
-  width: 1000px;
+  width: 1100px;
+  height: auto;
   margin: auto;
 }
 .button a {
