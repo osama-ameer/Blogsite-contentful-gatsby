@@ -17,7 +17,7 @@ module.exports = {
       options: {
         spaceId: "qli877ujsryw",
         accessToken: "C0ZAHbvswGGSyeq-5Rt9LPZuPqgPT4b0iqWaRcnUppM",
-        forceFullSync: true,
+        
 
       }
     },
